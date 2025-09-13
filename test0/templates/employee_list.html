@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Employee List</h2>
+    
+    <div style="margin: 1rem 0; padding: 1rem; background-color: #f8f9fa; border-radius: 4px;">
+        <h3>Filter/Search Employees</h3>
+        <form method="get" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+            <div>
+                <label>Search by Name:</label>
+                <input type="text" name="search" value="{{ request.GET.search }}" style="width: 100%; padding: 0.5rem;">
+            </div>
+            <div>
+                <label>Filter by Department:</label>
+                <input type="text" name="department" value="{{ request.GET.department }}" style="width: 100%; padding: 0.5rem;">
+            </div>
+            <div>
+                <label>Filter by Position:</label>
+                <input type="text" name="position" value="{{ request.GET.position }}" style="width: 100%; padding: 0.5rem;">
+            </div>
+            <div style="grid-column: span 3;">
+                <button type="submit" style="background-color: #3498db; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">
+                    Apply Filters
+                </button>
+                <a href="{% url 'employee_list' %}" style="color: #7f8c8d; margin-left: 1rem;">Clear Filters</a>
+            </div>
+        </form>
+    </div>
+    
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+        <thead>
+            <tr style="background-color: #34495e; color: white;">
+                <th style="padding: 0.75rem; text-align: left;">Name</th>
+                <th style="padding: 0.75rem; text-align: left;">Email</th>
+                <th style="padding: 0.75rem; text-align: left;">Position</th>
+                <th style="padding: 0.75rem; text-align: left;">Department</th>
+                <th style="padding: 0.75rem; text-align: left;">Salary</th>
+                <th style="padding: 0.75rem; text-align: left;">Hire Date</th>
+                <th style="padding: 0.75rem; text-align: left;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 0.75rem;">{{ employee.first_name }} {{ employee.last_name }}</td>
+                <td style="padding: 0.75rem;">{{ employee.email }}</td>
+                <td style="padding: 0.75rem;">{{ employee.position }}</td>
+                <td style="padding: 0.75rem;">{{ employee.department }}</td>
+                <td style="padding: 0.75rem;">${{ employee.salary }}</td>
+                <td style="padding: 0.75rem;">{{ employee.hire_date }}</td>
+                <td style="padding: 0.75rem;">
+                    <form action="{% url 'delete_employee' employee.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background-color: #e74c3c; color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 3px; cursor: pointer; font-size: 0.8rem;" 
+                                onclick="return confirm('Are you sure you want to delete {{ employee.first_name }} {{ employee.last_name }}?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" style="padding: 1rem; text-align: center; color: #7f8c8d;">No employees found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
