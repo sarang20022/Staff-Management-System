@@ -1,26 +1,25 @@
-# Staff-Management-System
-## Staff-Management-System/
-├── .gitignore
-├── README.md
-├── manage.py
-├── db.sqlite3 (optional - better to exclude)
-├── staff_management/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
-├── employees/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py
-│   ├── tests.py
-│   ├── views.py
-│   └── urls.py
-├── templates/
-│   ├── base.html
-│   ├── home.html
-│   ├── add_employee.html
-│   ├── employee_list.html
-│   └── confirm_delete.html
+# Staff Management System
+
+A Django-based web application for managing employee records with CRUD operations and filtering capabilities.
+
+## Features
+
+- ✅ Add new employees
+- ✅ View employee list
+- ✅ Filter by department, position, or name
+- ✅ Delete employees with confirmation
+- ✅ Django admin backend
+- ✅ Responsive design
+
+## Tech Stack
+
+- **Backend:** Django 4.2
+- **Database:** SQLite
+- **Frontend:** HTML5, CSS3
+- **ORM:** Django ORM
+
+## Quick Start
+
+1. Clone repository:
+```bash
+git clone https://github.com/sarang20022/Staff-Management-System.git
